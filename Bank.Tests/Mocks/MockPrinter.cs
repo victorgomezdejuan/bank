@@ -1,15 +1,13 @@
 
+using System.Text;
+
 namespace Bank.Tests.Mocks;
 
 public class MockPrinter : IPrinter
 {
-    public void PrintLine(string line)
-    {
-        throw new NotImplementedException();
-    }
+    private readonly StringBuilder output = new();
 
-    internal IEnumerable<char> GetOutput()
-    {
-        throw new NotImplementedException();
-    }
+    public void PrintLine(string line) => output.AppendLine(line);
+
+    internal string GetOutput() => output.ToString();
 }

@@ -3,13 +3,9 @@ namespace Bank.Tests.Mocks;
 
 public class MockTimeProvider : ITimeProvider
 {
-    public DateTime GetTime()
-    {
-        throw new NotImplementedException();
-    }
+    private DateOnly currentDate;
 
-    internal void SetTime(DateTime dateTime)
-    {
-        throw new NotImplementedException();
-    }
+    public DateOnly CurrentDate => currentDate;
+
+    internal void SetCurrentDate(DateOnly date) => currentDate = date;
 }

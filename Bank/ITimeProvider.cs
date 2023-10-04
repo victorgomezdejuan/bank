@@ -2,5 +2,5 @@ namespace Bank;
 
 public interface ITimeProvider
 {
-    DateTime GetTime();
+    DateOnly CurrentDate { get; }
 }
