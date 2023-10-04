@@ -19,20 +19,32 @@ public class AccountService : IAccountService
 
     public void PrintStatement()
     {
-        List<string> statementLines = new();
+        foreach (var line in StatementLines())
+        {
+            printService.PrintLine(line);
+        }
+    }
+
+    private IEnumerable<string> StatementLines()
+    {
+        var statementLines = new List<string>();
         int balance = 0;
 
         foreach (var entry in account.GetEntries().OrderBy(e => e.Date))
         {
             balance += entry.CalculateAmountWithSign();
-            statementLines.Add($"{entry.Date:dd/MM/yyyy} || {entry.CalculateAmountWithSign(),-6} || {balance}");
+            statementLines.Add(StatementEntry(entry, balance));
         }
 
-        statementLines.Add("Date       || Amount || Balance");
+        statementLines.Add(StatementHeader());
 
-        foreach (var line in statementLines.AsEnumerable().Reverse())
-        {
-            printService.PrintLine(line);
-        }
+        return statementLines.AsEnumerable().Reverse();
+    }
+
+    private static string StatementHeader() => "Date       || Amount || Balance";
+
+    private static string StatementEntry(IAccountEntry entry, int balance)
+    {
+        return $"{entry.Date:dd/MM/yyyy} || {entry.CalculateAmountWithSign(),-6} || {balance}";
     }
 }
