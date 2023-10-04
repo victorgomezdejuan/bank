@@ -1,9 +1,13 @@
+using Ardalis.GuardClauses;
+
 namespace Bank;
 
 public class Withdrawal : IAccountEntry
 {
     public Withdrawal(DateOnly date, int amount)
     {
+        Guard.Against.NegativeOrZero(amount, nameof(amount));
+
         Amount = amount;
         Date = date;
         
