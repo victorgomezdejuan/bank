@@ -9,4 +9,12 @@ public class WithdrawalTests
 
         Assert.Throws<ArgumentException>(action);
     }
+
+    [Fact]
+    public void NegativeAmountIsNotValid()
+    {
+        static void action() => new Withdrawal(new DateOnly(2021, 1, 1), -100);
+
+        Assert.Throws<ArgumentException>(action);
+    }
 }
