@@ -5,7 +5,7 @@ namespace Bank.Tests;
 
 public class AcceptanceTests
 {
-    [Fact(Skip = "Acceptance test to be run after whole implementation is done")]
+    [Fact]
     public void StatementIsCorrectlyPrintedForAnAccountWithSeveralEntries()
     {
         // Arrange
